@@ -38,7 +38,7 @@ public class Main {
 		printOut("8: 0000 1000");
 		printOut("33: 0010 0001");
 		printOut("78: 0100 1110");
-		printOut("0000 0011 0001 0011");
+		printOut("787: 0000 0011 0001 0011");
 		printOut("1000 0100 1100 0011");
 	}
 	
