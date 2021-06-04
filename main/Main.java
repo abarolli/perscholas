@@ -34,10 +34,10 @@ public class Main {
 	}
 	
 	public static void question1() {
-		printOut("0000 0001");
-		printOut("0000 1000");
-		printOut("0010 0001");
-		printOut("0100 1110");
+		printOut("1: 0000 0001");
+		printOut("8: 0000 1000");
+		printOut("33: 0010 0001");
+		printOut("78: 0100 1110");
 		printOut("0000 0011 0001 0011");
 		printOut("1000 0100 1100 0011");
 	}
