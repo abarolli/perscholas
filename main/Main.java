@@ -1,39 +1,22 @@
 package main;
 
-public class Main {
+import utils.HomeworkAssignment;
+
+public class Main extends HomeworkAssignment {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		String[] methods = new String[7];
-		for (int i = 0; i < methods.length; ++i) {
-			methods[i] = "question" + (i + 1);
-		}
-		
-		runAll(methods);
+		new Main().run();
+	}
+
+	public void run() {
+		initQuestionsList(7);
+
+		runAllQuestions();
 	}
 	
-	public static void printOut(Object s) {
-		System.out.println(s);
-	}
-	
-	public static void runAll(String[] methods) {
-		var mainApp = new Main();
-		
-		try {
-			for (int i = 0; i < methods.length; ++i) {
-				printOut("Question " + (i + 1) + '\n');
-				Main.class.getMethod(methods[i]).invoke(mainApp);
-				printOut("----------------------------------");
-			}			
-		}
-		catch (Exception e) {
-			printOut("Uh oh!! Exception!");
-			printOut(e.getMessage());
-		}
-	}
-	
-	public static void question1() {
+	public void question1() {
 		printOut("1: 0000 0001");
 		printOut("8: 0000 1000");
 		printOut("33: 0010 0001");
@@ -42,7 +25,7 @@ public class Main {
 		printOut("1000 0100 1100 0011");
 	}
 	
-	public static void question2() {
+	public void question2() {
 		printOut("2");
 		printOut("9");
 		printOut("52");
@@ -51,7 +34,7 @@ public class Main {
 		printOut("11367");
 	}
 	
-	public static void question3() {
+	public void question3() {
 		int x;
 		x = 2;
 		
@@ -62,7 +45,7 @@ public class Main {
 		printOut(Integer.toBinaryString(x));
 	}
 	
-	public static void question4() {
+	public void question4() {
 		int x, y, z;
 		
 		x = 7;	// 0000 0111
@@ -79,7 +62,7 @@ public class Main {
 		printOut(Integer.toBinaryString(z));
 	}
 	
-	public static void question5() {
+	public void question5() {
 		int x;
 		x = 3;
 		printOut(x);
@@ -89,7 +72,7 @@ public class Main {
 		printOut(x);
 	}
 	
-	public static void question6() {
+	public void question6() {
 		int x = 3;
 		
 		++x;
@@ -100,7 +83,7 @@ public class Main {
 		printOut(x);
 	}
 	
-	public static void question7() {
+	public void question7() {
 		int x, y;
 		x = 5;
 		y = 8;
