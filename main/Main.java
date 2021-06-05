@@ -5,7 +5,6 @@ import utils.HomeworkAssignment;
 public class Main extends HomeworkAssignment {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		
 		new Main().run();
 	}
