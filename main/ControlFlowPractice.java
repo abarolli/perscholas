@@ -17,7 +17,7 @@ public class ControlFlowPractice extends HomeworkAssignment{
 	public void run() {
 		initQuestionsList(6);
 		
-		runAllQuestions(mainApp);
+		runAllQuestions();
 	}
 	
 	public void question1() {

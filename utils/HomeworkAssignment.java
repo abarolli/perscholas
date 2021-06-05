@@ -16,13 +16,12 @@ public abstract class HomeworkAssignment {
 		System.out.println(s);
 	}
 	
-	public void runAllQuestions(Object targetObj) {
+	public void runAllQuestions() {
 		
-		Class targetClass = targetObj.getClass();
 		try {
 			for (int i = 0; i < getQuestionsAll().size(); ++i) {
 				printOut("Question " + (i + 1));
-				targetClass.getMethod(getQuestionsAll().get(i)).invoke(targetObj);
+				this.getClass().getMethod(getQuestionsAll().get(i)).invoke(this);
 				printOut("-------------------------------------");
 			}
 		}
