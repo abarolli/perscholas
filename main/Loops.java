@@ -7,11 +7,9 @@ import utils.HomeworkAssignment;
 
 public class Loops extends HomeworkAssignment{
 	
-	private static Loops mainApp = new Loops();
-	
 	public static void main(String[] args) {
 		
-		mainApp.run();
+		new Loops().run();
 	}
 	
 	public void run() {
