@@ -19,7 +19,8 @@ public abstract class HomeworkAssignment {
 	public void runAllQuestions() {
 		
 		try {
-			for (int i = 0; i < getQuestionsAll().size(); ++i) {
+			ArrayList<String> arr = getQuestionsAll();
+			for (int i = 0; i < arr.size(); ++i) {
 				printOut("Question " + (i + 1));
 				this.getClass().getMethod(getQuestionsAll().get(i)).invoke(this);
 				printOut("-------------------------------------");

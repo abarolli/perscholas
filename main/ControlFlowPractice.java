@@ -7,6 +7,7 @@ import utils.HomeworkAssignment;
 
 public class ControlFlowPractice extends HomeworkAssignment{
 	
+	// only create one instance of the main app
 	private static ControlFlowPractice mainApp = new ControlFlowPractice();
 	
 	public static void main(String[] args) {

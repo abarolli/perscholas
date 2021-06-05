@@ -84,12 +84,12 @@ public class Loops extends HomeworkAssignment{
 	
 	public void question8() {
 		
-		int count = 0;
-		while (true) {
-			int currentFibNum = fibonacci(count);
-			if (currentFibNum > 50) break;
-			
+		int count = 1;
+		int currentFibNum = 0;
+		while (currentFibNum <= 50) {
 			printOut(currentFibNum);
+			
+			currentFibNum = fibonacci(count);
 			++count;
 		}
 	}
