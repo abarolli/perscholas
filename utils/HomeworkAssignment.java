@@ -1,28 +1,24 @@
 package utils;
 
-import java.util.ArrayList;
-
 public abstract class HomeworkAssignment {
 	
-	private ArrayList<String> questions = new ArrayList<String>();
+	private String[] questions;
 	
 	public void initQuestionsList(int length) {
+		questions = new String[length];
+
 		for (int i = 0; i < length; ++i) {
-			questions.add("question" + (i + 1));
+			questions[i] = "question" + (i + 1);
 		}
-	}
-	
-	public void printOut(Object s) {
-		System.out.println(s);
 	}
 	
 	public void runAllQuestions() {
 		
 		try {
-			ArrayList<String> arr = getQuestionsAll();
-			for (int i = 0; i < arr.size(); ++i) {
+
+			for (int i = 0; i < questions.length; ++i) {
 				printOut("Question " + (i + 1));
-				this.getClass().getMethod(arr.get(i)).invoke(this);
+				this.getClass().getMethod(questions[i]).invoke(this);
 				printOut("-------------------------------------");
 			}
 		}
@@ -33,7 +29,7 @@ public abstract class HomeworkAssignment {
 		
 	}
 	
-	public ArrayList<String> getQuestionsAll() {
-		return questions;
+	public void printOut(Object s) {
+		System.out.println(s);
 	}
 }
