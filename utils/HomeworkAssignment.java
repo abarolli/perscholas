@@ -1,6 +1,6 @@
 package utils;
 
-public abstract class HomeworkAssignment {
+public abstract class HomeworkAssignment implements RunnableHomework {
 	
 	private String[] questions;
 	
