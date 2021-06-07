@@ -68,8 +68,6 @@ public class Arrays extends HomeworkAssignment {
 		}
 	}
 	
-	
-	
 	public void question7() {
 		String[] arr = {"a", "b", "c", "d", "e"};
 		
