@@ -1,5 +1,7 @@
 package utils;
 
+import java.util.Arrays;
+
 public abstract class HomeworkAssignment implements RunnableHomework {
 	
 	private String[] questions;
@@ -29,6 +31,10 @@ public abstract class HomeworkAssignment implements RunnableHomework {
 		
 	}
 	
+	public void printQuestionsList() {
+		printOut(Arrays.toString(questions));
+	}
+
 	public void printOut(Object s) {
 		System.out.println(s);
 	}

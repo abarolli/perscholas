@@ -12,6 +12,8 @@ public class Variables extends HomeworkAssignment {
     public void run() {
         initQuestionsList(8);
 
+        printQuestionsList();
+        
         runAllQuestions();
     }
 
@@ -126,6 +128,10 @@ class CoffeeShopItem {
 
     public double getPrice() {
         return price;
+    }
+
+    public String getName() {
+        return name;
     }
 }
 
