@@ -6,7 +6,7 @@ public class OperatorsAndNumbers extends HomeworkAssignment {
 
 	public static void main(String[] args) {
 		
-		new Main().run();
+		new OperatorsAndNumbers().run();
 	}
 
 	public void run() {
