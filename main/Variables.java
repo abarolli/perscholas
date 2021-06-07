@@ -11,8 +11,6 @@ public class Variables extends HomeworkAssignment {
 
     public void run() {
         initQuestionsList(8);
-
-        printQuestionsList();
         
         runAllQuestions();
     }
