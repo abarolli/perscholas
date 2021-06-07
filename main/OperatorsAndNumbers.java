@@ -2,7 +2,7 @@ package main;
 
 import utils.HomeworkAssignment;
 
-public class Main extends HomeworkAssignment {
+public class OperatorsAndNumbers extends HomeworkAssignment {
 
 	public static void main(String[] args) {
 		
