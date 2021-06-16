@@ -17,13 +17,13 @@ public class CarFinder {
                 boolean fileIsFound = false;
                 ArrayList<Car> cars = null;
                 do {
-                    System.out.println("Enter path to car information csv file: ");
+                    System.out.println("\nEnter path to car information csv file: ");
                     String path = reader.nextLine();
                     try {
                         cars = CarInformation.setCarsInformation(path);
                     }
                     catch (IOException | NumberFormatException ex) {
-                        System.out.println("That file was not found or is not recognized as an appropriate file for this command. Try entering the absolute path ...\n");
+                        System.out.println("\nThat file was not found or is not recognized as an appropriate file for this command. Try entering the absolute path ...");
                         continue;
                     }
                     
