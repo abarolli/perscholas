@@ -1,0 +1,2 @@
+<Car: AMC Matador (sw), MPG: 15.0, Cylinders: 8, Displacement: 304.0, Horsepower: 150.0, Weight: 3892.0, Acceleration: 12.5, Model: 72, Origin: US>
+<Car: AMC Matador (sw), MPG: 14.0, Cylinders: 8, Displacement: 304.0, Horsepower: 150.0, Weight: 4257.0, Acceleration: 15.5, Model: 74, Origin: US>

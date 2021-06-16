@@ -1,18 +1,21 @@
 package main.arraylist_javaio;
 
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.io.IOException;
+import main.arraylist_javaio.query.Query;
 
 public class CarFinder {
+
     public static void main(String[] args) {
 
             try (
                 Scanner reader = new Scanner(System.in);
             ) {
-    
                 
                 boolean fileIsFound = false;
                 ArrayList<Car> cars = null;
@@ -35,15 +38,21 @@ public class CarFinder {
                 
                 ArrayList<Car> searchResults = null;
                 boolean inPlay = true;
+                
                 while (inPlay) {
-
+                    
+                    String outputPath = "";
                     while (inPlay) {
                         System.out.println("\nEnter name of car you'd like to look for: ");
-                        String carName = reader.nextLine().toLowerCase().trim();
-                
-            
-                        searchResults = searchBy(cars, "car", carName);
-        
+                        String carQuery = reader.nextLine().toLowerCase().trim();
+                        
+                        Query q = extractOutputPathFromQuery(carQuery);
+
+                        carQuery = q.getSearch();
+                        outputPath = q.getOutput();
+
+                        searchResults = searchBy(cars, "car", carQuery.trim());
+
                         if (searchResults != null) break;
         
                         inPlay = askToContinue("\nDidn't find anything. Want to look up a different car?", reader);
@@ -51,7 +60,11 @@ public class CarFinder {
                     
                     if (!inPlay) break;
 
-                    printMatches(searchResults);
+                    if (!outputPath.isEmpty())
+                        writeMatchesToFile(searchResults, outputPath);
+                    else
+                        printMatches(searchResults);
+
 
                     inPlay = askToContinue("Would you like to make another car query?", reader);
                 }
@@ -60,7 +73,6 @@ public class CarFinder {
             catch (Exception ex) {
                 ex.printStackTrace();
             }
-        
     }
 
     public static ArrayList<Car> searchBy(List<Car> cars, String property, Object value) {
@@ -142,5 +154,41 @@ public class CarFinder {
             System.out.println(c);
         }
         System.out.println("=============================================================================================\n");
+    }
+
+    private static void writeMatchesToFile(ArrayList<Car> matches, String outputPath) {
+        try (
+            FileWriter fwriter = new FileWriter(new File(outputPath));
+        ) {
+            for (Car c : matches) {
+                fwriter.write(c.toString() + "\n");
+            }
+            System.out.println("The results were written to " + outputPath + "\n");
+        }
+        catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    private static Query extractOutputPathFromQuery(String carQuery) {
+
+        String[] carQueryTokens = carQuery.split(" ");
+        String outputPath = "";
+
+        carQuery = "";
+        for (int i = 0; i < carQueryTokens.length; ++i) {
+            if (!carQueryTokens[i].equals("--o")) { //NOT
+                carQuery += (carQueryTokens[i] + " ");
+            }
+            else {
+                // need more elegant solution if I choose to use more switches
+                if ((i + 1) < carQueryTokens.length) {
+                    outputPath = carQueryTokens[i + 1];
+                    break;
+                }
+            }
+        }
+
+        return new Query(carQuery, outputPath);
     }
 }
