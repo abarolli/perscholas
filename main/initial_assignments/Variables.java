@@ -1,4 +1,4 @@
-package main;
+package main.initial_assignments;
 
 import java.text.NumberFormat;
 import utils.HomeworkAssignment;

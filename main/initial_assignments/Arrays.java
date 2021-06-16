@@ -1,4 +1,4 @@
-package main;
+package main.initial_assignments;
 
 import utils.HomeworkAssignment;
 
