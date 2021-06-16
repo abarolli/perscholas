@@ -9,49 +9,57 @@ import java.io.IOException;
 public class CarFinder {
     public static void main(String[] args) {
 
-        try (
-            Scanner reader = new Scanner(System.in);
-        ) {
-
-            boolean fileIsFound = false;
-            ArrayList<Car> cars = null;
-
-            do {
-                System.out.println("Enter path to car information csv file: ");
-                String path = reader.nextLine();
-                try {
-                    cars = CarInformation.setCarsInformation(path);
+            try (
+                Scanner reader = new Scanner(System.in);
+            ) {
+    
+                
+                boolean fileIsFound = false;
+                ArrayList<Car> cars = null;
+                do {
+                    System.out.println("Enter path to car information csv file: ");
+                    String path = reader.nextLine();
+                    try {
+                        cars = CarInformation.setCarsInformation(path);
+                    }
+                    catch (IOException ex) {
+                        System.out.println("That file was not found or is not recognized as an appropriate file for this command. Try entering the absolute path ...\n");
+                        continue;
+                    }
+                    
+                    fileIsFound = true;
+                    
                 }
-                catch (IOException ex) {
-                    System.out.println("That file was not found or is not recognized as an appropriate file for this command. Try entering the absolute path ...\n");
-                    continue;
-                }
+                while (!fileIsFound);
+                
+                
+                ArrayList<Car> searchResults = null;
+                boolean inPlay = true;
+                while (inPlay) {
 
-                fileIsFound = true;
+                    while (inPlay) {
+                        System.out.println("\nEnter name of car you'd like to look for: ");
+                        String carName = reader.nextLine().toLowerCase().trim();
+                
+            
+                        searchResults = searchBy(cars, "car", carName);
+        
+                        if (searchResults != null) break;
+        
+                        inPlay = askToContinue("\nDidn't find anything. Want to look up a different car?", reader);
+                    }
+                    
+                    if (!inPlay) break;
+
+                    printMatches(searchResults);
+
+                    inPlay = askToContinue("Would you like to make another car query?", reader);
+                }
 
             }
-            while (!fileIsFound);
-    
-            System.out.println("\nEnter name of car you'd like to look for: ");
-            String carName = reader.nextLine().toLowerCase().trim();
-    
-
-            ArrayList<Car> searchResults = searchBy(cars, "car", carName);
-
-            if (searchResults != null) {
-                System.out.println("========================================== MATCHES ==========================================");
-                for (Car c : searchResults) {
-                    System.out.println(c);
-                }
-                System.out.println("=============================================================================================");
+            catch (Exception ex) {
+                ex.printStackTrace();
             }
-            else 
-                System.out.println("Nothing found");
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
         
     }
 
@@ -112,5 +120,27 @@ public class CarFinder {
         
         return searchByCar(cars, car, middleIndex + 1, right);
 
+    }
+
+
+    private static boolean askToContinue(String message, Scanner reader) {
+        String reSearchAnswer = "";
+
+        while (!(reSearchAnswer.equals("y") || reSearchAnswer.equals("n"))) {
+        
+            System.out.print(message + " [y / n]: ");
+            reSearchAnswer = reader.nextLine().toLowerCase();
+        }
+
+        return reSearchAnswer.equals("y");
+    }
+
+
+    private static void printMatches(ArrayList<Car> searchResults) {
+        System.out.println("========================================== MATCHES ==========================================");
+        for (Car c : searchResults) {
+            System.out.println(c);
+        }
+        System.out.println("=============================================================================================\n");
     }
 }
