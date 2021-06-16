@@ -33,7 +33,7 @@ public class CarFinder {
             while (!fileIsFound);
     
             System.out.println("\nEnter name of car you'd like to look for: ");
-            String carName = reader.nextLine();
+            String carName = reader.nextLine().toLowerCase().trim();
     
 
             ArrayList<Car> searchResults = searchBy(cars, "car", carName);
@@ -79,7 +79,7 @@ public class CarFinder {
         int middleIndex = (left + right) / 2;
         Car middleCar = cars.get(middleIndex);
 
-        if (car.equals(middleCar.getCar())) {
+        if (car.equals(middleCar.getCar().toLowerCase().trim())) {
             
             results.add(middleCar);
             
@@ -88,7 +88,7 @@ public class CarFinder {
 
             if (i > 0) {
                 Car leftCar = cars.get(i);
-                while(car.equals(leftCar.getCar())) {
+                while(car.equals(leftCar.getCar().toLowerCase().trim())) {
                     results.add(leftCar);
                     if (i == 0) break;
                     leftCar = cars.get(--i);
@@ -97,7 +97,7 @@ public class CarFinder {
             
             if (j < cars.size()) {
                 Car rightCar = cars.get(j);
-                while (car.equals(rightCar.getCar())) {
+                while (car.equals(rightCar.getCar().toLowerCase().trim())) {
                     results.add(rightCar);
                     if (j == cars.size() - 1) break;
                     rightCar = cars.get(++i);
@@ -107,7 +107,7 @@ public class CarFinder {
             return results;
         }
         
-        if (car.compareTo(middleCar.getCar()) < 0)
+        if (car.compareTo(middleCar.getCar().toLowerCase().trim()) < 0)
             return searchByCar(cars, car, left, middleIndex - 1);
         
         return searchByCar(cars, car, middleIndex + 1, right);
