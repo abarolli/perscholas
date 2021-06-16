@@ -16,10 +16,11 @@ public class CarFinder {
             try (
                 Scanner reader = new Scanner(System.in);
             ) {
+
+                ArrayList<Car> cars = null;
                 
                 boolean fileIsFound = false;
-                ArrayList<Car> cars = null;
-                do {
+                while (!fileIsFound) {
                     System.out.println("\nEnter path to car information csv file: ");
                     String path = reader.nextLine();
                     try {
@@ -31,10 +32,8 @@ public class CarFinder {
                     }
                     
                     fileIsFound = true;
-                    
                 }
-                while (!fileIsFound);
-                
+
                 
                 ArrayList<Car> searchResults = null;
                 boolean inPlay = true;
