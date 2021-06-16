@@ -22,7 +22,7 @@ public class CarFinder {
                     try {
                         cars = CarInformation.setCarsInformation(path);
                     }
-                    catch (IOException ex) {
+                    catch (IOException | NumberFormatException ex) {
                         System.out.println("That file was not found or is not recognized as an appropriate file for this command. Try entering the absolute path ...\n");
                         continue;
                     }
@@ -108,7 +108,7 @@ public class CarFinder {
                 while (car.equals(rightCar.getCar().toLowerCase().trim())) {
                     results.add(rightCar);
                     if (j == cars.size() - 1) break;
-                    rightCar = cars.get(++i);
+                    rightCar = cars.get(++j);
                 }
             }
 
