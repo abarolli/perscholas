@@ -7,7 +7,6 @@ main\Variables.java
 main\arraylist_javaio\Car.java
 main\arraylist_javaio\CarFinder.java
 main\arraylist_javaio\CarInformation.java
-main\arraylist_javaio\query\Query.java
 main\banking\Bank.java
 main\banking\BankAccount.java
 main\banking\CheckingAccount.java

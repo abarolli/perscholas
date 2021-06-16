@@ -7,9 +7,34 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.io.IOException;
-import main.arraylist_javaio.query.Query;
 
 public class CarFinder {
+
+    private static class Query {
+        private String search;
+        private String output;
+
+        public Query(String search, String output) {
+            setSearchRequest(search);
+            setOutputPath(output);
+        }
+
+        public String getSearchRequest() {
+            return search;
+        }
+
+        public void setSearchRequest(String search) {
+            this.search = search;
+        }
+
+        public String getOutputPath() {
+            return output;
+        }
+
+        public void setOutputPath(String output) {
+            this.output = output;
+        }
+    }
 
     public static void main(String[] args) {
 
@@ -17,27 +42,10 @@ public class CarFinder {
                 Scanner reader = new Scanner(System.in);
             ) {
 
-                ArrayList<Car> cars = null;
-                
-                boolean fileIsFound = false;
-                while (!fileIsFound) {
-                    System.out.println("\nEnter path to car information csv file: ");
-                    String path = reader.nextLine();
-                    try {
-                        cars = CarInformation.setCarsInformation(path);
-                    }
-                    catch (IOException | NumberFormatException ex) {
-                        System.out.println("\nThat file was not found or is not recognized as an appropriate file for this command. Try entering the absolute path ...");
-                        continue;
-                    }
-                    
-                    fileIsFound = true;
-                }
-
+                ArrayList<Car> cars = requestCarsInformation(reader);
                 
                 ArrayList<Car> searchResults = null;
                 boolean inPlay = true;
-                
                 while (inPlay) {
                     
                     String outputPath = "";
@@ -45,12 +53,12 @@ public class CarFinder {
                         System.out.println("\nEnter name of car you'd like to look for: ");
                         String carQuery = reader.nextLine().toLowerCase().trim();
                         
+                        
                         Query q = extractOutputPathFromQuery(carQuery);
+                        carQuery = q.getSearchRequest();
+                        outputPath = q.getOutputPath();
 
-                        carQuery = q.getSearch();
-                        outputPath = q.getOutput();
-
-                        searchResults = searchBy(cars, "car", carQuery.trim());
+                        searchResults = searchListByPropertyValue(cars, "car", carQuery);
 
                         if (searchResults != null) break;
         
@@ -74,7 +82,7 @@ public class CarFinder {
             }
     }
 
-    public static ArrayList<Car> searchBy(List<Car> cars, String property, Object value) {
+    public static ArrayList<Car> searchListByPropertyValue(List<Car> cars, String property, Object value) {
         
         ArrayList<Car> results = null;
 
@@ -82,14 +90,14 @@ public class CarFinder {
 
         switch (property) {
             case "car":
-                results = searchByCar(cars, (String) value, 0, cars.size() - 1);
+                results = searchListByCar(cars, (String) value, 0, cars.size() - 1);
                 break;
         }
 
         return results;
     }
 
-    private static ArrayList<Car> searchByCar(List<Car> cars, String car, int left, int right) {
+    private static ArrayList<Car> searchListByCar(List<Car> cars, String car, int left, int right) {
 
         if (left > right) return null;
 
@@ -127,9 +135,9 @@ public class CarFinder {
         }
         
         if (car.compareTo(middleCar.getCar().toLowerCase().trim()) < 0)
-            return searchByCar(cars, car, left, middleIndex - 1);
+            return searchListByCar(cars, car, left, middleIndex - 1);
         
-        return searchByCar(cars, car, middleIndex + 1, right);
+        return searchListByCar(cars, car, middleIndex + 1, right);
 
     }
 
@@ -188,6 +196,25 @@ public class CarFinder {
             }
         }
 
-        return new Query(carQuery, outputPath);
+        // need to trim one last time bc of additional space at end
+        return new Query(carQuery.trim(), outputPath);
+    }
+
+    private static ArrayList<Car> requestCarsInformation(Scanner reader) {
+        
+        ArrayList<Car> cars;
+        while (true) {
+            System.out.println("\nEnter path to car information csv file: ");
+            String path = reader.nextLine();
+            try {
+                cars = CarInformation.setCarsInformation(path);
+            }
+            catch (IOException | NumberFormatException ex) {
+                System.out.println("\nThat file was not found or is not recognized as an appropriate file for this command. Try entering the absolute path ...");
+                continue;
+            }
+            
+            return cars;
+        }
     }
 }
